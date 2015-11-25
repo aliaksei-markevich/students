@@ -2,7 +2,16 @@ package ru.artezio.task1;
 
 import java.util.Scanner;
 
-public class Main {
+/**
+ * Класс реализующий сложение двух чисел
+ */
+public class Task1 {
+
+    /**
+     * Главный метод
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         int firstNumber;
         int secondNumber;

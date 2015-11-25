@@ -2,8 +2,16 @@ package ru.artezio.task3;
 
 import java.util.Scanner;
 
-public class Main {
+/**
+ * Класс реализующий сортировку
+ */
+public class Task3 {
 
+    /**
+     * Главный метод
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         int size;
         Scanner sc = new Scanner(System.in);
@@ -19,6 +27,11 @@ public class Main {
         show(array);
     }
 
+    /**
+     * Вывод массива
+     *
+     * @param array входящий массив
+     */
     private static void show(int[] array) {
         System.out.println("Массив: ");
         for (int element : array) {
@@ -27,6 +40,11 @@ public class Main {
         System.out.println();
     }
 
+    /**
+     * Сортировка массива
+     *
+     * @param array входящий массив
+     */
     private static void sort(int[] array) {
         for (int i = 0; i < array.length; i++) {
             int min = array[i];

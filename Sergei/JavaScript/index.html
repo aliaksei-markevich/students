@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+			margin-right:50%;
+			background-color: #666;
+		}
+		li {
+			
+			float: left;
+		}
+		li a {
+			display: block;
+			color: white;
+			text-align: center;
+			padding: 14px 16px;
+			text-decoration: none;
+		}
+		li a:hover {
+			background-color: #111;
+		}
+		div {
+			padding: 10px;
+			border-width: 2px;
+			border: 4px double black;
+			margin-right:50%;
+			line-height: 1;
+		}
+	</style>
+</head>
+<body>
+	<ul id="tabs">
+		<li id="li1"><a href="#">ФИО</a> </li>
+		<li id="li2"><a href="#">Пол, религиозные предпочтения</a></li>
+		<li id="li3"><a href="#">Доп. поля какие-нибудь</a></li>
+	</ul>
+	<div id="tab1" class="tab">
+		<p>Укажите фамилию <input type="text" name="name" value="" placeholder=""></p>
+		<p>Укажите имя <input type="text" name="name" value="" placeholder=""></p>
+		<p>Укажите отчество <input type="text" name="name" value="" placeholder=""></p>
+	</div>
+	<div id="tab2" class="tab">
+		<p>Укажите ваш пол:</p>
+		<p>муж <input type="radio" name="sex" value=""></p>
+		<p>жен <input type="radio" name="sex" value=""></p>
+		<p>Укажите ваши религиозные предпочтения</p>
+		<p>христианству <input type="radio" name="religion" value=""></p>
+		<p>мусульманству <input type="radio" name="religion" value=""></p>
+		<p>язычеству <input type="radio" name="religion" value=""></p>
+	</div>
+	<div id="tab3" class="tab">
+		<p>Выбор 1 <input type="checkbox" name="" value="" placeholder=""></p>
+		<p>Выбор 2 <input type="checkbox" name="" value="" placeholder=""></p>
+		<p>Выбор 3 <input type="checkbox" name="" value="" placeholder=""></p>
+	</div>
+	<script type="text/javascript">
+	function show (target) {
+		clear();
+		switch(target.id){
+			case "li1":
+			document.getElementById("tab1").style.display = "";
+			break;
+			case "li2":
+			document.getElementById("tab2").style.display = "";
+			break;
+			case "li3":
+			document.getElementById("tab3").style.display = "";
+			break;
+			default:
+			break;
+		}
+		target.style.backgroundColor = "green";
+	}
+	function clear () {
+		var alltab = document.getElementsByClassName("tab");
+		for(var i = 0; i < alltab.length; i++)
+			alltab[i].style.display = "none";
+		var listli = document.getElementsByTagName("li")
+		for(var i = 0; i < listli.length; i++ ){
+			listli[i].style.backgroundColor = "";
+		}
+	}
+	clear();
+	document.getElementById("li1").style.backgroundColor = "green";
+	document.getElementById("tab1").style.display = "";
+	var listul = document.getElementById("tabs");
+	listul.onclick = function(event){
+		var target = event.target;
+		while (target != document.getElementById("tabs")){
+			if(target.tagName == 'LI'){
+				clear();
+				show(target);
+				return;
+			}
+			target = target.parentNode;
+		}
+	};
+	</script>
+</body>
+</html>

@@ -9,7 +9,7 @@
 			margin: 0;
 			padding: 0;
 			overflow: hidden;
-			margin-right:50%;
+			margin-right:30%;
 			background-color: #666;
 		}
 		li {
@@ -30,7 +30,7 @@
 			padding: 10px;
 			border-width: 2px;
 			border: 4px double black;
-			margin-right:50%;
+			margin-right:30%;
 			line-height: 1;
 		}
 	</style>
@@ -40,6 +40,7 @@
 		<li id="li1"><a href="#">ФИО</a> </li>
 		<li id="li2"><a href="#">Пол, религиозные предпочтения</a></li>
 		<li id="li3"><a href="#">Доп. поля какие-нибудь</a></li>
+		<li id="newPage"><a href="index2.html">Ссылка на нов.стр.</a></li>
 	</ul>
 	<div id="tab1" class="tab">
 		<p>Укажите фамилию <input type="text" name="name" value="" placeholder=""></p>
@@ -88,13 +89,14 @@
 		}
 	}
 	clear();
+	document.getElementById("newPage").style.float = "right";
 	document.getElementById("li1").style.backgroundColor = "green";
 	document.getElementById("tab1").style.display = "";
 	var listul = document.getElementById("tabs");
 	listul.onclick = function(event){
 		var target = event.target;
 		while (target != document.getElementById("tabs")){
-			if(target.tagName == 'LI'){
+			if(target.tagName == 'LI' && target.id.indexOf("li")+1){
 				clear();
 				show(target);
 				return;

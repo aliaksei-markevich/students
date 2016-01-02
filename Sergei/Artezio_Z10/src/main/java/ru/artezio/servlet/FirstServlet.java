@@ -11,6 +11,6 @@ public class FirstServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html; charset=windows-1251");
         resp.getWriter().print("<h1>Привет пользователь</h1>");
-		resp.getWriter().close();
+        resp.getWriter().close();
     }
 }

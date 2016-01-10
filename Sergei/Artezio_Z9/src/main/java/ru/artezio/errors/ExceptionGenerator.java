@@ -3,7 +3,7 @@ package ru.artezio.errors;
 /**
  * Класс генерирующий исключение
  */
-public class Exclusion {
+public class ExceptionGenerator {
 
     /**
      * Главная функция
@@ -21,9 +21,9 @@ public class Exclusion {
      * @param condition
      * @throws Exception
      */
-    private static void generateException(Boolean condition) throws Exception {
+    private static void generateException(Boolean condition) throws MyException {
         if (condition == null) {
-            throw new Exception("Генерация исключения");
+            throw new MyException("Генерация ошибки: нулевая ссылка");
         }
     }
 
@@ -36,11 +36,11 @@ public class Exclusion {
         boolean check = false;
         try {
             generateException(condition);
-        } catch (Exception e) {
+        } catch (MyException e) {
             System.out.println(e);
             check = true;
         } finally {
-            if (check == true) System.out.println("Объект исключения был перехвачен");
+            if (check == true) System.out.println("Объект исключения был перехвачек");
         }
     }
 }

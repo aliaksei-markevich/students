@@ -35,7 +35,7 @@ public class ControllerForTables {
     /**
      * Метод импортирует из xls в БД
      */
-    public static void importExcelToDB() {
+    public static void importExcelToDB(InputStream inputStream) {
 
         /**
          * Переменные для хранения значений таблицы
@@ -44,14 +44,9 @@ public class ControllerForTables {
         int numberPhone, code;
         Connection conn = null;
         Statement stmt = null;
-        InputStream in = null;
         HSSFWorkbook wb = null;
-
-        //String s= new java.io.File("src\\main\\resources\\tables\\1.xls").getAbsolutePath();
-        final String PATH_XLS_FILE = "E:\\Artezio\\dbJsJquery\\src\\main\\resources\\tables\\1.xls";
         try {
-            in = new FileInputStream(PATH_XLS_FILE);
-            wb = new HSSFWorkbook(in);
+            wb = new HSSFWorkbook(inputStream);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -75,10 +70,9 @@ public class ControllerForTables {
             System.err.println(e.getMessage());
         } finally {
             try {
-                in.close();
                 stmt.close();
                 conn.close();
-
+                inputStream.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -90,25 +84,22 @@ public class ControllerForTables {
     /**
      * Метод импортирует из csv в БД
      */
-    public static void importCsvToDB() {
+    public static void importCsvToDB(InputStream inputStream) {
 
         CSVReader reader = null;
         Connection conn = null;
         Statement stmt = null;
-        String s = "E:\\Artezio\\dbJsJquery\\src\\main\\resources\\tables\\3.csv";
-        //String PATHCSV = new java.io.File("src\\main\\resources\\tables\\2.csv").getAbsolutePath();
         String[] nextLine;
-        FileInputStream myInputStream = null;
         String encoding = "UTF8";
         try {
-            myInputStream = new FileInputStream(s);
-            reader = new CSVReader(new InputStreamReader(myInputStream, encoding), ',');
+            reader = new CSVReader(new InputStreamReader(inputStream, encoding), ',');
             conn = getConnection();
             stmt = conn.createStatement();
             while ((nextLine = reader.readNext()) != null) {
                 stmt.executeUpdate("INSERT INTO treetable(" +
                         "             id , title, parent_id)" +
-                        "    VALUES ('" + Integer.parseInt(nextLine[0]) + "','" + nextLine[1] + "','" + Integer.parseInt(nextLine[2]) + "');");
+                        "    VALUES ('" + Integer.parseInt(nextLine[0]) + "','" + nextLine[1] + "','" +
+                        Integer.parseInt(nextLine[2]) + "');");
             }
 
         } catch (FileNotFoundException e) {
@@ -119,7 +110,7 @@ public class ControllerForTables {
             e.printStackTrace();
         } finally {
             try {
-                myInputStream.close();
+                inputStream.close();
                 reader.close();
                 stmt.close();
                 conn.close();

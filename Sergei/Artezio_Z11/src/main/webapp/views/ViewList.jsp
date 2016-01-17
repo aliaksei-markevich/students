@@ -24,7 +24,6 @@
 <hr>
 <a href="${pageContext.servletContext.contextPath}/import">Импорт в таблицу</a>
 <a href="${pageContext.servletContext.contextPath}/viewTree">Просмотреть дерево</a>
-<a href="${pageContext.servletContext.contextPath}/viewList?clear=1" >Очистить список</a>
 <br>
 </body>
 </html>

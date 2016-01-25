@@ -1,10 +1,8 @@
-package ru.artezio.dbWithView.classes;
+package ru.artezio.dbWithView.models;
 
-import ru.artezio.dbWithView.models.TreeBranch;
+import ru.artezio.dbWithView.db_helpers.DBHelper;
+import ru.artezio.dbWithView.db_helpers.DBTreeHelper;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,34 +17,6 @@ public class TreeNode {
     private static List<TreeBranch> allBranches;
 
     /**
-     * Метод берет ветви из БД и заносит их в перемсуннею allBranches
-     */
-    private static void exportBranchesFromDB() {
-        Connection conn = null;
-        ResultSet rs = null;
-        Statement s = null;
-        try {
-            conn = ControllerForTables.getConnection();
-            String sql = "SELECT * FROM treetable";
-            s = conn.createStatement();
-            s.executeQuery(sql);
-            rs = s.getResultSet();
-            while (rs.next()) {
-                allBranches.add(new TreeBranch(rs.getInt(1), rs.getString(2), rs.getInt(3)));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                rs.close();
-                s.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
      * Метод возвращает строку для постройки denytree
      *
      * @return строку для denytree
@@ -54,7 +24,8 @@ public class TreeNode {
     public static String createTree() {
         allBranches = new ArrayList<TreeBranch>();
         boolean firstRootBranch = true;
-        exportBranchesFromDB();
+        DBHelper helper = new DBTreeHelper();
+        allBranches = helper.exportFromDB();
         StringBuffer sb = new StringBuffer();
         sb.delete(0, sb.length());
         sb.append("children: [\n");
@@ -75,7 +46,7 @@ public class TreeNode {
     /**
      * Метод для проверки дочерних ветвей
      *
-     * @param sb строка в которую записывается само дерево
+     * @param sb     строка в которую записывается само дерево
      * @param branch
      */
     private static void checkChildrenBranches(StringBuffer sb, TreeBranch branch) {

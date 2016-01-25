@@ -12,7 +12,12 @@ public class Client {
     private int anotherId;
 
     public Client(int idClient, String lastName, String firstName, int numberPhone, int anotherId) {
+        this(lastName, firstName, numberPhone, anotherId);
         this.idClient = idClient;
+
+    }
+
+    public Client(String lastName, String firstName, int numberPhone, int anotherId) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.numberPhone = numberPhone;
@@ -23,39 +28,24 @@ public class Client {
         return idClient;
     }
 
-    public void setIdClient(int idClient) {
-        this.idClient = idClient;
-    }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
 
     public int getNumberPhone() {
         return numberPhone;
     }
 
-    public void setNumberPhone(int numberPhone) {
-        this.numberPhone = numberPhone;
-    }
 
     public int getAnotherId() {
         return anotherId;
     }
 
-    public void setAnotherId(int anotherId) {
-        this.anotherId = anotherId;
-    }
 }

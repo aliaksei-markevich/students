@@ -6,5 +6,5 @@ import java.io.InputStream;
 import java.util.List;
 
 public interface FilesHelperInterface<T> {
-   List<T> createElements(InputStream inputStream, ObjectForJSON obj);
+    List<T> createElements(InputStream inputStream, ObjectForJSON obj);
 }

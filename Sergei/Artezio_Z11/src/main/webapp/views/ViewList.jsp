@@ -15,8 +15,10 @@
     </tr>
     <c:forEach items="${data}" var="data" varStatus="status">
         <tr valign="top">
-            <td>${data.getIdClient()}</td><td>${data.getLastName()}</td>
-            <td>${data.getFirstName()}</td><td>${data.getNumberPhone()}</td>
+            <td>${data.getIdClient()}</td>
+            <td>${data.getLastName()}</td>
+            <td>${data.getFirstName()}</td>
+            <td>${data.getNumberPhone()}</td>
             <td>${data. getAnotherId()}</td>
         </tr>
     </c:forEach>
@@ -24,6 +26,7 @@
 <hr>
 <a href="${pageContext.servletContext.contextPath}/import">Импорт в таблицу</a>
 <a href="${pageContext.servletContext.contextPath}/viewTree">Просмотреть дерево</a>
+<a href="${pageContext.servletContext.contextPath}/login">Сменить логин</a>
 <br>
 </body>
 </html>

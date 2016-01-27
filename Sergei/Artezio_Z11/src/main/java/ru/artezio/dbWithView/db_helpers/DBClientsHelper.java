@@ -21,15 +21,15 @@ public class DBClientsHelper extends DBHelper<Client> {
 
     @Override
     protected String executeDeleteQuery() {
-        return "DELETE FROM Клиенты"+ ";alter sequence sq_global restart;";
+        return "DELETE FROM Клиенты" + ";alter sequence sq_global restart;";
     }
 
     @Override
-    protected List<Client> executeSelectQuery(Statement stm) throws SQLException{
+    protected List<Client> executeSelectQuery(Statement stm) throws SQLException {
         List<Client> listClients = new ArrayList<Client>();
         String sql = "SELECT * FROM Клиенты";
         stm.executeQuery(sql);
-        ResultSet  rs = stm.getResultSet();
+        ResultSet rs = stm.getResultSet();
         while (rs.next()) {
             listClients.add(new Client(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5)));
         }

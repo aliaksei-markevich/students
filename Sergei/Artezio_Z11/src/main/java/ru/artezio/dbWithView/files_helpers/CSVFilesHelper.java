@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class CSVFilesHelper implements FilesHelperInterface<TreeBranch> {
 
-    public  List<TreeBranch> createElements(InputStream inputStream, ObjectForJSON obj) {
+    public List<TreeBranch> createElements(InputStream inputStream, ObjectForJSON obj) {
 
         CSVReader reader = null;
         String[] nextLine;
@@ -33,12 +33,10 @@ public class CSVFilesHelper implements FilesHelperInterface<TreeBranch> {
             try {
                 inputStream.close();
                 reader.close();
-            }
-            catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
                 obj.setStatus("Ошибка в закрытии потока");
-            }
-            finally {
+            } finally {
                 return listBranches;
             }
         }

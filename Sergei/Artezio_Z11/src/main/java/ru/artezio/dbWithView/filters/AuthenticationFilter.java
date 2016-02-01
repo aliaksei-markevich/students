@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
-public class AuthFilter implements Filter {
+public class AuthenticationFilter implements Filter {
 
 
     public void init(FilterConfig fConfig) throws ServletException {

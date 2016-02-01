@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>Просмотр таблицы .xsl списком </title>
+    <link rel="shortcut icon" href="">
 </head>
 <body>
 <table border="1">

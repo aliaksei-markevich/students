@@ -5,6 +5,6 @@
     <link rel="shortcut icon" href="">
 </head>
 <body>
-Неверный логин/пароль
+<p>Данной страницы не существует</p>
 </body>
 </html>

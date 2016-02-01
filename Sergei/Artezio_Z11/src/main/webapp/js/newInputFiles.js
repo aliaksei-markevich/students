@@ -1,5 +1,5 @@
 ;var i = 2;
-var afterElement
+var afterElement;
 function addInputFile() {
     //  document.getElementById('form_inner').innerHTML = document.getElementById('form_inner').innerHTML +
     //      "<br><input type='file' id='uploadFile" + i + "' size='50'/><input id='uploadButton"+i+"' type='button' onclick='uploadFiles("+i+")' value='Загрузить'/><br>";

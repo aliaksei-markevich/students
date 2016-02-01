@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>Просмотр дерева</title>
+    <link rel="shortcut icon" href="">
     <script src='./js/jquery.js' type='text/javascript'></script>
     <script src="./js/jquery-ui.custom.js" type="text/javascript"></script>
     <script src='./js/jquery.cookie.js' type='text/javascript'></script>

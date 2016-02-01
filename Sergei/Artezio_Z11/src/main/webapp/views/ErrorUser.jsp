@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>Нет доступа</title>
+    <link rel="shortcut icon" href="">
 </head>
 <body>
 <p>Данная старница вам не доступна</p>

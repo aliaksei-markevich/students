@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>Login</title>
+    <link rel="shortcut icon" href="">
 </head>
 <body>
 <form action="/login" method="post">

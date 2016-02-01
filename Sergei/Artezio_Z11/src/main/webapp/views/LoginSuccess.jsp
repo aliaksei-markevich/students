@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>Подтверждение</title>
+    <link rel="shortcut icon" href="">
 </head>
 <body>
 Вы вошли в систему как ${user.getName()}

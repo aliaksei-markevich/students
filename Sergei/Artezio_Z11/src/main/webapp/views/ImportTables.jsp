@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>Загрузка справочников</title>
+    <link rel="shortcut icon" href="">
     <script src='./js/jquery.js' type='text/javascript'></script>
     <script src='./js/newInputFiles.js' type='text/javascript'></script>
     <script src='./js/prototypeJSON.js' type='text/javascript'></script>

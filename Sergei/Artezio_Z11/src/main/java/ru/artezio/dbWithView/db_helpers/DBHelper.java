@@ -16,23 +16,30 @@ import java.util.List;
  *
  * @param <T> Объекты, которые будут использоваться для записи и чтения из БД
  */
-abstract public class DBHelper<T> {
+public class DBHelper<T> {
+
+    private final Class<T> type;
 
     private final SessionFactory factory;
 
-    public DBHelper() {
+    public DBHelper(Class<T> type) {
         factory = new Configuration().configure().buildSessionFactory();
+        this.type = type;
     }
 
     public final List<T> exportFromDB() {
         final Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         try {
-            return executeSelectQuery(session);
+            return session.createQuery("from "+getMyType().getSimpleName()).list();
         } finally {
             tx.commit();
             session.close();
         }
+    }
+
+    public Class<T> getMyType() {
+        return this.type;
     }
 
     public final void importToDB(List<T> list, ObjectForJSON obj) {
@@ -59,16 +66,12 @@ abstract public class DBHelper<T> {
         final Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         try {
-            this.executeDeleteQuery(session);
+            session.createQuery("delete from "+getMyType().getSimpleName()).executeUpdate();
         } finally {
             tx.commit();
             session.close();
         }
 
     }
-
-    protected abstract void executeDeleteQuery(Session session);
-
-    protected abstract List<T> executeSelectQuery(Session session);
 
 }

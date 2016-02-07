@@ -5,6 +5,7 @@ import ru.artezio.dbWithView.files_helpers.FilesHelperInterface;
 import ru.artezio.dbWithView.files_helpers.XSLFilesHelper;
 import ru.artezio.dbWithView.models.Client;
 import ru.artezio.dbWithView.models.ObjectForJSON;
+import ru.artezio.dbWithView.models.TreeBranch;
 
 import javax.servlet.http.Part;
 import java.util.Collections;
@@ -15,7 +16,7 @@ public class XSLUploader extends Uploader<Client> {
     public void uploadFile(Part file, ObjectForJSON obj) {
         List<Client> listClients= Collections.emptyList();
         obj.setSizeFile(file.getSize());
-        DBHelper hibernate=new TreeHibernateDBHelper();
+        DBHelper hibernate=new DBHelper(Client.class);
         FilesHelperInterface fileHelper=new XSLFilesHelper();
         super.createRecordInDB(file,listClients,fileHelper,hibernate,obj);
     }

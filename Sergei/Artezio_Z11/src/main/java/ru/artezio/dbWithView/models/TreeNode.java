@@ -1,7 +1,7 @@
 package ru.artezio.dbWithView.models;
 
 import ru.artezio.dbWithView.db_helpers.DBHelper;
-import ru.artezio.dbWithView.db_helpers.DBTreeHelper;
+import ru.artezio.dbWithView.db_helpers.TreeHibernateDBHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ public class TreeNode {
     public static String createTree() {
         allBranches = new ArrayList<TreeBranch>();
         boolean firstRootBranch = true;
-        DBHelper helper = new DBTreeHelper();
+        DBHelper helper = new TreeHibernateDBHelper();
         allBranches = helper.exportFromDB();
         StringBuffer sb = new StringBuffer();
         sb.delete(0, sb.length());

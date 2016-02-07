@@ -1,9 +1,7 @@
 package ru.artezio.dbWithView.servlets;
 
 import com.google.gson.Gson;
-import ru.artezio.dbWithView.db_helpers.DBClientsHelper;
-import ru.artezio.dbWithView.db_helpers.DBHelper;
-import ru.artezio.dbWithView.db_helpers.DBTreeHelper;
+import ru.artezio.dbWithView.db_helpers.*;
 import ru.artezio.dbWithView.uploaders.Uploader;
 import ru.artezio.dbWithView.uploaders.CSVUploader;
 import ru.artezio.dbWithView.uploaders.XSLUploader;
@@ -24,15 +22,15 @@ public class ImportTablesServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        DBHelper helper = null;
+        DBHelper hibernate= null;
         if (req.getParameter("clear") != null && req.getParameter("clear").equals("1")) {
-            helper = new DBClientsHelper();
-            helper.deleteTable();
+            hibernate = new ClientHibernateHelper();
+            hibernate.clearTable();
         }
 
         if (req.getParameter("clear") != null && req.getParameter("clear").equals("2")) {
-            helper = new DBTreeHelper();
-            helper.deleteTable();
+            hibernate = new TreeHibernateDBHelper();
+            hibernate.clearTable();
         }
         RequestDispatcher dispatcher = req.getRequestDispatcher("/views/ImportTables.jsp");
         dispatcher.forward(req, resp);

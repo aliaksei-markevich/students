@@ -14,12 +14,12 @@ public abstract class Uploader<T> {
     public abstract void uploadFile(Part file, ObjectForJSON obj);
 
     protected final void createRecordInDB(Part file, List<T> list, FilesHelperInterface fileHelper,
-                                    DBHelper dbHelper, ObjectForJSON obj) {
+                                          DBHelper hibernate, ObjectForJSON obj) {
         InputStream inputStream = null;
         try {
             inputStream = file.getInputStream();
             list = fileHelper.createElements(inputStream, obj);
-            dbHelper.importToDB(list, obj);
+            hibernate.importToDB(list, obj);
         } catch (IOException e) {
             e.printStackTrace();
             obj.setStatus("Ошибка в потоке");

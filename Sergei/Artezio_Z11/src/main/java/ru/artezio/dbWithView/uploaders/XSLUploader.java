@@ -15,9 +15,9 @@ public class XSLUploader extends Uploader<Client> {
     public void uploadFile(Part file, ObjectForJSON obj) {
         List<Client> listClients= Collections.emptyList();
         obj.setSizeFile(file.getSize());
-        DBHelper dbHelper=new DBClientsHelper();
+        DBHelper hibernate=new TreeHibernateDBHelper();
         FilesHelperInterface fileHelper=new XSLFilesHelper();
-        super.createRecordInDB(file,listClients,fileHelper,dbHelper,obj);
+        super.createRecordInDB(file,listClients,fileHelper,hibernate,obj);
     }
 
 }

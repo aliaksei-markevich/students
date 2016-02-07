@@ -1,6 +1,11 @@
 package ru.artezio.dbWithView.db_helpers;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 import ru.artezio.dbWithView.models.ObjectForJSON;
+import ru.artezio.dbWithView.models.TreeBranch;
 
 import java.sql.*;
 import java.util.Iterator;
@@ -13,93 +18,57 @@ import java.util.List;
  */
 abstract public class DBHelper<T> {
 
-    public final Connection getConnection() throws Exception {
-        Class.forName("org.postgresql.Driver");
-        String url = "jdbc:postgresql://localhost:5432/artezio_db";
-        String username = "postgres";
-        String password = "root";
-        return DriverManager.getConnection(url, username, password);
-    }
+    private final SessionFactory factory;
 
-    public final void importToDB(List<T> list, ObjectForJSON obj) {
-        int count = 0;
-        Connection conn = null;
-        Statement stmt = null;
-        try {
-            conn = getConnection();
-            stmt = conn.createStatement();
-            Iterator<T> iterator = list.iterator();
-            while (iterator.hasNext()) {
-                T element = iterator.next();
-                int updateCount = executeUpdateQuery(element, stmt);
-                count += updateCount;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            obj.setStatus("Ошибка sql");
-        } catch (Exception e) {
-            e.printStackTrace();
-            obj.setStatus("Exception error");
-        } finally {
-            try {
-                conn.close();
-                stmt.close();
-            } catch (NullPointerException e) {
-                e.printStackTrace();
-                obj.setStatus("Ошибка Null");
-            } catch (SQLException e) {
-                e.printStackTrace();
-                obj.setStatus("Ошибка SQL");
-            } finally {
-                obj.setCountUploadRecords(count);
-            }
-        }
+    public DBHelper() {
+        factory = new Configuration().configure().buildSessionFactory();
     }
 
     public final List<T> exportFromDB() {
-        List<T> list = null;
-        Connection conn = null;
-        Statement s = null;
+        final Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
         try {
-            conn = getConnection();
-            s = conn.createStatement();
-            list = executeSelectQuery(s);
-        } catch (Exception e) {
-            e.printStackTrace();
+            return executeSelectQuery(session);
         } finally {
-            try {
-                s.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                return list;
-            }
+            tx.commit();
+            session.close();
         }
     }
 
-    public final void deleteTable() {
-        Connection conn = null;
-        Statement s = null;
+    public final void importToDB(List<T> list, ObjectForJSON obj) {
+        final Session session = factory.openSession();
+        int count=0;
+        Transaction tx = session.beginTransaction();
+        Iterator<T> iterator = list.iterator();
         try {
-            conn = getConnection();
-            String sql = executeDeleteQuery();
-            s = conn.createStatement();
-            s.executeUpdate(sql);
+            while (iterator.hasNext()){
+                session.save(iterator.next());
+                count++;}
         } catch (Exception e) {
             e.printStackTrace();
+            obj.setStatus("Ошибка в importToDB добавить "+count+" строке");
         } finally {
-            try {
-                s.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            obj.setCountUploadRecords(count);
+            tx.commit();
+            session.close();
         }
+
     }
 
-    protected abstract int executeUpdateQuery(T element, Statement stmt) throws SQLException;
+    public final void clearTable() {
+        final Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        try {
+            this.executeDeleteQuery(session);
+        } finally {
+            tx.commit();
+            session.close();
+        }
 
-    protected abstract String executeDeleteQuery();
+    }
 
-    protected abstract List<T> executeSelectQuery(Statement stm) throws SQLException;
+    protected abstract void executeDeleteQuery(Session session);
+
+    protected abstract List<T> executeSelectQuery(Session session);
 
 }

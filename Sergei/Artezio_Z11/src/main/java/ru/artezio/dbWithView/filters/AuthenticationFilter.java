@@ -28,11 +28,6 @@ public class AuthenticationFilter implements Filter {
             rd.forward(request, response);
             return;
         }
-//        if(((HttpServletRequest) request).getRequestURI().equals("/import") && !user.getName().equals("root")){
-//            RequestDispatcher rd = req.getRequestDispatcher("/views/ErrorUser.jsp");
-//            rd.forward(request, response);
-//            return;
-//        }
         chain.doFilter(request, response);
     }
 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="ru.artezio.dbWithView.models.Client" table="clients">
+        <id name="idClient" type="int" column="client_id">
+            <generator class="increment"/>
+        </id>
+        <property name="lastName" column="lastname" type="string"/>
+        <property name="firstName" column="firstname" type="string"/>
+        <property name="numberPhone" column="prone_number" type="int"/>
+        <property name="anotherId" column="code" type="int"/>
+    </class>
+</hibernate-mapping>

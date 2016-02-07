@@ -1,7 +1,7 @@
 package ru.artezio.dbWithView.servlets;
 
 import ru.artezio.dbWithView.db_helpers.DBHelper;
-import ru.artezio.dbWithView.db_helpers.DBUsersHelper;
+import ru.artezio.dbWithView.db_helpers.UserHibernateDBHelper;
 import ru.artezio.dbWithView.models.User;
 
 import java.io.IOException;
@@ -22,8 +22,8 @@ public class UserValidatorServlet extends HttpServlet {
     private static final Map<String, User> users = getUsers();
 
     private static Map<String, User> getUsers() {
-        DBHelper dbUsersHelper= new DBUsersHelper();
-        List<User> listUsers=dbUsersHelper.exportFromDB();
+        DBHelper hibernate= new UserHibernateDBHelper();
+        List<User> listUsers=hibernate.exportFromDB();
         Map<String, User> mapUsers = new HashMap<String, User>();
         Iterator<User> iteratorUsers = listUsers.iterator();
         while (iteratorUsers.hasNext()) {

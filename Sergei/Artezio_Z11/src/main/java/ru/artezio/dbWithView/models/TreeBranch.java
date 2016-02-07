@@ -9,12 +9,14 @@ public class TreeBranch {
     private String text;
     private int parentId;
 
+    public TreeBranch() {
+    }
+
     public TreeBranch(int id, String text, int parentId) {
         this.id = id;
         this.text = text;
         this.parentId = parentId;
     }
-
     public int getId() {
         return id;
     }

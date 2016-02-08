@@ -12,7 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Абстрактный класс для реализации классов, которые будут осуществлять работу с конекретной таблцой БД
+ * Класс использующий hibernate для работы с таблицами в бд
  *
  * @param <T> Объекты, которые будут использоваться для записи и чтения из БД
  */
@@ -27,15 +27,24 @@ public class DBHelper<T> {
         this.type = type;
     }
 
-    public final List<T> exportFromDB() {
+    public interface Command<T> {
+        T process(Session s);
+    }
+
+    private <T> T transaction(final Command<T> command) {
         final Session session = factory.openSession();
-        Transaction tx = session.beginTransaction();
+        final Transaction tx = session.beginTransaction();
         try {
-            return session.createQuery("from "+getMyType().getSimpleName()).list();
+            return command.process(session);
         } finally {
             tx.commit();
             session.close();
         }
+    }
+
+    public final List<T> exportFromDB() {
+
+        return transaction((Session session) -> session.createQuery("from " + type.getSimpleName()).list());
     }
 
     public Class<T> getMyType() {
@@ -43,35 +52,17 @@ public class DBHelper<T> {
     }
 
     public final void importToDB(List<T> list, ObjectForJSON obj) {
-        final Session session = factory.openSession();
-        int count=0;
-        Transaction tx = session.beginTransaction();
+        int count = 0;
         Iterator<T> iterator = list.iterator();
-        try {
-            while (iterator.hasNext()){
-                session.save(iterator.next());
-                count++;}
-        } catch (Exception e) {
-            e.printStackTrace();
-            obj.setStatus("Ошибка в importToDB добавить "+count+" строке");
-        } finally {
-            obj.setCountUploadRecords(count);
-            tx.commit();
-            session.close();
+        while (iterator.hasNext()) {
+            transaction((Session session) -> session.save(iterator.next()));
+            count++;
         }
-
+        obj.setCountUploadRecords(count);
     }
 
     public final void clearTable() {
-        final Session session = factory.openSession();
-        Transaction tx = session.beginTransaction();
-        try {
-            session.createQuery("delete from "+getMyType().getSimpleName()).executeUpdate();
-        } finally {
-            tx.commit();
-            session.close();
-        }
-
+        transaction((Session session) -> session.createQuery("delete from " + getMyType().getSimpleName()).executeUpdate());
     }
 
 }

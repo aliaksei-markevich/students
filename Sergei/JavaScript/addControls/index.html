@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
+    <link rel="stylesheet" href="first.css">
+    <script src="jquery-1.12.0.min.js"></script>
+    <script src="app.js"></script>
+</head>
+<body>
+<div id="bodyForm">
+    <div id="firstPart">
+        <label for="typeControls">Тип:</label>
+        <select id="typeControls">
+            <option value="" disabled selected hidden>Выберите тип</option>
+            <option value="email">Почтовый адрес</option>
+            <option value="phone">Телефонный номер</option>
+            <option value="numExp">Поле ввода чисел в экспонециальном виде</option>
+            <option value="num">Поле ввода чисел</option>
+        </select>
+        <div class="mask">
+            <label for="mask">Маска:</label>
+            <input type="text" id="mask" placeholder="_-для ввода символа">
+        </div>
+        <div class="count">
+            <label for="count">Кол-во частей:</label>
+            <input type="text" id="count">
+        </div>
+        <button type="button" id="addControl"><img src="1.png"/>Добавить</button>
+    </div>
+    <div id="secondPart">
+    </div>
+</div>
+</body>
+</html>

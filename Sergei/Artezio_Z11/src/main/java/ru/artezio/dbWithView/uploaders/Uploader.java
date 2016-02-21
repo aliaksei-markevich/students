@@ -1,8 +1,9 @@
 package ru.artezio.dbWithView.uploaders;
 
-import ru.artezio.dbWithView.db_helpers.DBHelper;
+import org.springframework.web.multipart.MultipartFile;
+import ru.artezio.dbWithView.db_helpers.DBHelperDAO;
 import ru.artezio.dbWithView.files_helpers.FilesHelperInterface;
-import ru.artezio.dbWithView.models.ObjectForJSON;
+import ru.artezio.dbWithView.dto.ObjectForJSON;
 
 import javax.servlet.http.Part;
 import java.io.IOException;
@@ -11,10 +12,10 @@ import java.util.List;
 
 public abstract class Uploader<T> {
 
-    public abstract void uploadFile(Part file, ObjectForJSON obj);
+    public abstract ObjectForJSON uploadFile(MultipartFile file);
 
-    protected final void createRecordInDB(Part file, List<T> list, FilesHelperInterface fileHelper,
-                                          DBHelper hibernate, ObjectForJSON obj) {
+    protected final void createRecordInDB(MultipartFile file, List<T> list, FilesHelperInterface fileHelper,
+                                          DBHelperDAO hibernate, ObjectForJSON obj) {
         InputStream inputStream = null;
         try {
             inputStream = file.getInputStream();

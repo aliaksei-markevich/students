@@ -4,6 +4,7 @@
 <head>
     <title>Просмотр таблицы .xsl списком </title>
     <link rel="shortcut icon" href="">
+    <c:set var="context" value="${pageContext.request.contextPath}" />
 </head>
 <body>
 <table border="1">
@@ -25,9 +26,9 @@
     </c:forEach>
 </table>
 <hr>
-<a href="${pageContext.servletContext.contextPath}/import">Импорт в таблицу</a>
-<a href="${pageContext.servletContext.contextPath}/viewTree">Просмотреть дерево</a>
-<a href="${pageContext.servletContext.contextPath}/login">Сменить логин</a>
+<a href="${context}/import">Импорт в таблицу</a>
+<a href="${context}/viewTree">Просмотреть дерево</a>
+<a href="${context}/login">Сменить логин</a>
 <br>
 </body>
 </html>

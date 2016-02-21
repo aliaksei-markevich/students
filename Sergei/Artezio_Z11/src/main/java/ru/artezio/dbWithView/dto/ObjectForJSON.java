@@ -1,4 +1,4 @@
-package ru.artezio.dbWithView.models;
+package ru.artezio.dbWithView.dto;
 
 public class ObjectForJSON {
     String status = "OK";

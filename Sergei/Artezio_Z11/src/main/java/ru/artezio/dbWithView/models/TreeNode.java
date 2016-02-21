@@ -1,6 +1,8 @@
 package ru.artezio.dbWithView.models;
 
-import ru.artezio.dbWithView.db_helpers.DBHelper;
+import org.springframework.context.support.AbstractApplicationContext;
+import ru.artezio.dbWithView.db_helpers.DBHelperDAO;
+import ru.artezio.dbWithView.springhelpers.SingletonContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +25,9 @@ public class TreeNode {
     public static String createTree() {
         allBranches = new ArrayList<TreeBranch>();
         boolean firstRootBranch = true;
-        DBHelper helper = new DBHelper(TreeBranch.class);
-        allBranches = helper.exportFromDB();
+        AbstractApplicationContext context = SingletonContext.getInstance();
+        DBHelperDAO dbHelper = (DBHelperDAO) context.getBean("dbhelpertreetable");
+        allBranches = dbHelper.exportFromDB();
         StringBuffer sb = new StringBuffer();
         sb.delete(0, sb.length());
         sb.append("children: [\n");

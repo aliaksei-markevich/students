@@ -10,5 +10,6 @@
         </id>
         <property name="name" column="user_name" type="string"/>
         <property name="password" column="user_password" type="string"/>
+        <property name="role" column="user_role" type="string"/>
     </class>
 </hibernate-mapping>

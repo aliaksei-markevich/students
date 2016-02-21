@@ -1,7 +1,7 @@
 package ru.artezio.dbWithView.files_helpers;
 
 import au.com.bytecode.opencsv.CSVReader;
-import ru.artezio.dbWithView.models.ObjectForJSON;
+import ru.artezio.dbWithView.dto.ObjectForJSON;
 import ru.artezio.dbWithView.models.TreeBranch;
 
 import java.io.IOException;

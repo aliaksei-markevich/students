@@ -1,17 +1,21 @@
 package ru.artezio.dbWithView.models;
 
+import org.springframework.security.core.GrantedAuthority;
+
 public class User {
     int user_id;
     private String name="unknown";
     private String password="unknown";
+    private String role;
 
     public User() {
     }
 
-    public User(final int user_id,final String name,final String password) {
+    public User(int user_id, String name, String password, String role) {
         this.user_id = user_id;
         this.name = name;
         this.password = password;
+        this.role = role;
     }
 
     public String getName() {
@@ -41,5 +45,13 @@ public class User {
     @Override
     public String toString() {
         return this.password+" "+this.name;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

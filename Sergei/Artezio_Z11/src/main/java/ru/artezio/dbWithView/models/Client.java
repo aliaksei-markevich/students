@@ -1,6 +1,6 @@
 package ru.artezio.dbWithView.models;
 
-import javax.persistence.*;
+import ru.artezio.dbWithView.dto.AnotherId;
 
 /**
  * Класс реализующий харнение данных для клиентов (xls файл)
@@ -11,18 +11,18 @@ public class Client {
     private String lastName;
     private String firstName;
     private int numberPhone;
-    private int anotherId;
+    private AnotherId anotherId;
 
     public Client() {
     }
 
-    public Client(int idClient, String lastName, String firstName, int numberPhone, int anotherId) {
+    public Client(int idClient, String lastName, String firstName, int numberPhone, AnotherId anotherId) {
         this(lastName, firstName, numberPhone, anotherId);
         this.idClient = idClient;
 
     }
 
-    public Client(String lastName, String firstName, int numberPhone, int anotherId) {
+    public Client(String lastName, String firstName, int numberPhone, AnotherId anotherId) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.numberPhone = numberPhone;
@@ -49,7 +49,7 @@ public class Client {
     }
 
 
-    public int getAnotherId() {
+    public AnotherId getAnotherId() {
         return anotherId;
     }
 
@@ -69,9 +69,10 @@ public class Client {
         this.numberPhone = numberPhone;
     }
 
-    public void setAnotherId(int anotherId) {
+    public void setAnotherId(AnotherId anotherId) {
         this.anotherId = anotherId;
     }
+
 
     @Override
     public String toString() {

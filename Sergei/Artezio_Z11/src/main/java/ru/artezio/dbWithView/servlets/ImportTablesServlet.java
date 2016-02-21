@@ -1,13 +1,12 @@
 package ru.artezio.dbWithView.servlets;
 
 import com.google.gson.Gson;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.web.multipart.MultipartFile;
 import ru.artezio.dbWithView.db_helpers.*;
-import ru.artezio.dbWithView.models.Client;
-import ru.artezio.dbWithView.models.TreeBranch;
+import ru.artezio.dbWithView.springhelpers.SingletonContext;
 import ru.artezio.dbWithView.uploaders.Uploader;
-import ru.artezio.dbWithView.uploaders.CSVUploader;
-import ru.artezio.dbWithView.uploaders.XSLUploader;
-import ru.artezio.dbWithView.models.ObjectForJSON;
+import ru.artezio.dbWithView.dto.ObjectForJSON;
 
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.Part;
@@ -24,15 +23,15 @@ public class ImportTablesServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        DBHelper hibernate= null;
+        DBHelperDAO dbHelper = null;
+        AbstractApplicationContext context = SingletonContext.getInstance();
         if (req.getParameter("clear") != null && req.getParameter("clear").equals("1")) {
-            hibernate = new DBHelper(Client.class);
-            hibernate.clearTable();
+            dbHelper = (DBHelperDAO) context.getBean("dbheleprclients");
+            dbHelper.clearTable();
         }
-
         if (req.getParameter("clear") != null && req.getParameter("clear").equals("2")) {
-            hibernate = new DBHelper(TreeBranch.class);
-            hibernate.clearTable();
+            dbHelper = (DBHelperDAO) context.getBean("dbhelpertreetable");
+            dbHelper.clearTable();
         }
         RequestDispatcher dispatcher = req.getRequestDispatcher("/views/ImportTables.jsp");
         dispatcher.forward(req, resp);
@@ -41,18 +40,19 @@ public class ImportTablesServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int lenghtFileName = 0;
+        AbstractApplicationContext context = SingletonContext.getInstance();
         ObjectForJSON obj = new ObjectForJSON();
         Uploader fileUpload = null;
-        Part filePart = req.getPart("file");
+       /* MultipartFile filePart = req.getPart("file");
         try {
             if (filePart != null && filePart.getSubmittedFileName() != null) {
                 lenghtFileName = filePart.getSubmittedFileName().length();
                 //Если фал xls то в список, если csv то в дерево
                 if (filePart.getSubmittedFileName().substring(lenghtFileName - 3, lenghtFileName).equals("xls")) {
-                    fileUpload = new XSLUploader();
+                    fileUpload = (Uploader) context.getBean("xsluploder");
                     fileUpload.uploadFile(filePart, obj);
                 } else if (filePart.getSubmittedFileName().substring(lenghtFileName - 3, lenghtFileName).equals("csv")) {
-                    fileUpload = new CSVUploader();
+                    fileUpload = (Uploader) context.getBean("csvuploder");
                     fileUpload.uploadFile(filePart, obj);
                 } else {
                     obj.setStatus("Ошибка в расширении файла");
@@ -69,8 +69,8 @@ public class ImportTablesServlet extends HttpServlet {
             resp.setContentType("application/json");
             resp.setCharacterEncoding("utf-8");
             resp.getWriter().write(json);
-            resp.getWriter().flush();
-        }
+            resp.getWriter().flush();*/
+        //}
 
     }
 }

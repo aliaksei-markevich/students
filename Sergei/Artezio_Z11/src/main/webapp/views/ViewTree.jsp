@@ -8,8 +8,10 @@
     <script src="./js/jquery-ui.custom.js" type="text/javascript"></script>
     <script src='./js/jquery.cookie.js' type='text/javascript'></script>
     <script src='./js/jquery.dynatree.js' type='text/javascript'></script>
+    <c:set var="context" value="${pageContext.request.contextPath}" />
     <script>
         ;
+        $(document).ready(
         $(function () {
             // Attach the dynatree widget to an existing <div id="tree"> element
             // and pass the tree options as an argument to the dynatree() function:
@@ -20,16 +22,16 @@
                 },
                 ${tree}
             });
-        });
+        }));
     </script>
     <link href="./css/ui.dynatree.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="tree"></div>
 <hr>
-<a href="${pageContext.servletContext.contextPath}/import">Импорт в таблицу</a>
-<a href="${pageContext.servletContext.contextPath}/viewList">Просмотреть список</a>
-<a href="${pageContext.servletContext.contextPath}/login">Сменить логин</a>
+<a href="${context}/import">Импорт в таблицу</a>
+<a href="${context}/viewList">Просмотреть список</a>
+<a href="${context}/login">Сменить логин</a>
 <br>
 </body>
 </html>

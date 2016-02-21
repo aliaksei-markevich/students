@@ -3,8 +3,9 @@ package ru.artezio.dbWithView.files_helpers;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import ru.artezio.dbWithView.dto.AnotherId;
 import ru.artezio.dbWithView.models.Client;
-import ru.artezio.dbWithView.models.ObjectForJSON;
+import ru.artezio.dbWithView.dto.ObjectForJSON;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,7 +21,8 @@ public class XSLFilesHelper implements FilesHelperInterface<Client> {
     public List<Client> createElements(InputStream inputStream, ObjectForJSON obj) {
 
         String lastName, firstName;
-        int numberPhone, code;
+        int numberPhone;
+        AnotherId code;
         List<Client> listClients = new ArrayList<Client>();
         HSSFWorkbook wb = null;
         try {
@@ -33,7 +35,9 @@ public class XSLFilesHelper implements FilesHelperInterface<Client> {
                 lastName = row.getCell(0).toString();
                 firstName = row.getCell(1).toString();
                 numberPhone = (int) row.getCell(2).getNumericCellValue();
-                code = (int) row.getCell(3).getNumericCellValue();
+                code = new AnotherId((int) row.getCell(3).getNumericCellValue(),
+                        (int) row.getCell(4).getNumericCellValue(),
+                        (int) row.getCell(5).getNumericCellValue());
                 listClients.add(new Client(lastName, firstName, numberPhone, code));
             }
         } catch (Exception e) {

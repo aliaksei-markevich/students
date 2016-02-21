@@ -4,13 +4,19 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="ru.artezio.dbWithView.models.Client" table="clients">
+    <class name="ru.artezio.dbWithView.models.Client" table="Clients">
         <id name="idClient" type="int" column="client_id">
-            <generator class="increment"/>
+            <generator class="sequence">
+                <param name="sequence">sq_global</param>
+            </generator>
         </id>
         <property name="lastName" column="lastname" type="string"/>
         <property name="firstName" column="firstname" type="string"/>
         <property name="numberPhone" column="prone_number" type="int"/>
-        <property name="anotherId" column="code" type="int"/>
+        <component name="anotherId" access="field" class="ru.artezio.dbWithView.dto.AnotherId" >
+            <property name="first_id"  type="int"/>
+            <property name="second_id" type="int"/>
+            <property name="main_id" type="int"/>
+        </component>
     </class>
 </hibernate-mapping>

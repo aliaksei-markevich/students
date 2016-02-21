@@ -1,6 +1,6 @@
 package ru.artezio.dbWithView.files_helpers;
 
-import ru.artezio.dbWithView.models.ObjectForJSON;
+import ru.artezio.dbWithView.dto.ObjectForJSON;
 
 import java.io.InputStream;
 import java.util.List;

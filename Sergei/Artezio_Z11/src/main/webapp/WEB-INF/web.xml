@@ -4,7 +4,56 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
 
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            classpath:spring-context.xml
+            classpath:spring-security.xml
+        </param-value>
+    </context-param>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
     <servlet>
+        <servlet-name>appServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>
+                classpath:spring-context.xml
+                classpath:spring-security.xml
+            </param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+        <multipart-config/>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>appServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/errors/404.html</location>
+    </error-page>
+
+    <error-page>
+        <error-code>403</error-code>
+        <location>/errors/403.html</location>
+    </error-page>
+    <!--<servlet>
         <servlet-name>ImportTablesServlet</servlet-name>
         <servlet-class>ru.artezio.dbWithView.servlets.ImportTablesServlet</servlet-class>
     </servlet>
@@ -12,9 +61,9 @@
     <servlet-mapping>
         <servlet-name>ImportTablesServlet</servlet-name>
         <url-pattern>/import</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>-->
 
-    <servlet>
+    <!--<servlet>
         <servlet-name>ViewList</servlet-name>
         <servlet-class>ru.artezio.dbWithView.servlets.ViewListServlet</servlet-class>
     </servlet>
@@ -22,19 +71,19 @@
     <servlet-mapping>
         <servlet-name>ViewList</servlet-name>
         <url-pattern>/viewList</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>-->
 
-    <servlet>
-        <servlet-name>ViewTree</servlet-name>
-        <servlet-class>ru.artezio.dbWithView.servlets.ViewTreeServlet</servlet-class>
-    </servlet>
+    <!--  <servlet>
+          <servlet-name>ViewTree</servlet-name>
+          <servlet-class>ru.artezio.dbWithView.servlets.ViewTreeServlet</servlet-class>
+      </servlet>
 
-    <servlet-mapping>
-        <servlet-name>ViewTree</servlet-name>
-        <url-pattern>/viewTree</url-pattern>
-    </servlet-mapping>
+      <servlet-mapping>
+          <servlet-name>ViewTree</servlet-name>
+          <url-pattern>/viewTree</url-pattern>
+      </servlet-mapping>-->
 
-    <servlet>
+    <!--<servlet>
         <servlet-name>userValidator</servlet-name>
         <servlet-class>ru.artezio.dbWithView.servlets.UserValidatorServlet</servlet-class>
     </servlet>
@@ -42,8 +91,8 @@
         <servlet-name>userValidator</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
-
-    <filter>
+-->
+ <!--   <filter>
         <filter-name>AuthenticationFilter</filter-name>
         <filter-class>ru.artezio.dbWithView.filters.AuthenticationFilter</filter-class>
         <init-param>
@@ -67,6 +116,6 @@
     <filter-mapping>
         <filter-name>AuthorizationFilter</filter-name>
         <url-pattern>/*</url-pattern>
-    </filter-mapping>
+    </filter-mapping>-->
 
 </web-app>

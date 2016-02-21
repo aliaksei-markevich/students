@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Login</title>
@@ -7,8 +8,8 @@
 </head>
 <body>
 <form action="/login" method="post">
-    Логин: <input type="text" name="name"/>
-    Пароль: <input type="password" name="password"/>
+    Логин: <input type="text" name="login" id="login"/>
+    Пароль: <input type="password" name="password" id="password"/>
     <input type="submit" value="LogIn"/>
 </form>
 <p>admin - 1 (/import)</p>
@@ -17,10 +18,9 @@
 
 <p>user2 - 3 (view lists)</p>
 <br>
-<c:if test="${user.getName()!=null}">
-    <p>
-        Сейчас Вы в системе как ${user.getName()}
-    </p>
-</c:if>
+<core:if test="${not empty error}">
+    <div class="error">${error}</div>
+</core:if>
+
 </body>
 </html>

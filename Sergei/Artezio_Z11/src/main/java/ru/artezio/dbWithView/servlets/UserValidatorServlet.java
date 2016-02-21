@@ -1,7 +1,8 @@
 package ru.artezio.dbWithView.servlets;
 
-import ru.artezio.dbWithView.db_helpers.DBHelper;
-import ru.artezio.dbWithView.models.User;
+import org.springframework.context.support.AbstractApplicationContext;
+import ru.artezio.dbWithView.db_helpers.DBHelperDAO;import ru.artezio.dbWithView.models.User;
+import ru.artezio.dbWithView.springhelpers.SingletonContext;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -21,8 +22,9 @@ public class UserValidatorServlet extends HttpServlet {
     private static final Map<String, User> users = getUsers();
 
     private static Map<String, User> getUsers() {
-        DBHelper hibernate= new DBHelper(User.class);
-        List<User> listUsers=hibernate.exportFromDB();
+        AbstractApplicationContext context = SingletonContext.getInstance();
+        DBHelperDAO dbHelper = (DBHelperDAO) context.getBean("dbheleprueserssite");
+        List<User> listUsers = dbHelper.exportFromDB();
         Map<String, User> mapUsers = new HashMap<String, User>();
         Iterator<User> iteratorUsers = listUsers.iterator();
         while (iteratorUsers.hasNext()) {
@@ -33,7 +35,7 @@ public class UserValidatorServlet extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        RequestDispatcher rd=req.getRequestDispatcher("/views/Login.jsp");
+        RequestDispatcher rd = req.getRequestDispatcher("/views/Login.jsp");
         rd.forward(req, res);
     }
 
@@ -57,17 +59,17 @@ public class UserValidatorServlet extends HttpServlet {
 
     private User validateLogin(String name, String password) {
 
-        if (name == null || password == null){
+        if (name == null || password == null) {
             return null;
         }
 
         User user = users.get(name);
 
-        if (user == null){
+        if (user == null) {
             return null;
         }
 
-        if (!user.getPassword().equals(password.trim())){
+        if (!user.getPassword().equals(password.trim())) {
             return null;
         }
 

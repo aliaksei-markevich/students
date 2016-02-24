@@ -16,6 +16,7 @@
 </c:if>
 <a href="${context}/viewList">Просмотреть список</a>
 <a href="${context}/viewTree">Просмотреть дерево</a>
+<a href="${context}/search">Поиск</a>
 
 <br>
 <a href="${logoutUrl}">Log Out</a>

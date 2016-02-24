@@ -1,8 +1,11 @@
 package ru.artezio.dbWithView.models;
 
-import org.springframework.context.support.AbstractApplicationContext;
-import ru.artezio.dbWithView.db_helpers.DBHelperDAO;
-import ru.artezio.dbWithView.springhelpers.SingletonContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import ru.artezio.dbWithView.db_helpers.HibernateDAO;
+import ru.artezio.dbWithView.models.TreeBranch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,23 +13,26 @@ import java.util.List;
 /**
  * Класс реализующий "создание" дерева для denytree
  */
-public class TreeNode {
+@Component("TreeCreater")
+public class TreeCreater {
 
     /**
      * Хранит все ветви дерева
      */
-    private static List<TreeBranch> allBranches;
+    private List<TreeBranch> allBranches;
+
+    @Autowired
+    @Qualifier("dbHelperTreeTable")
+    private HibernateDAO dbHelper;
 
     /**
      * Метод возвращает строку для постройки denytree
      *
      * @return строку для denytree
      */
-    public static String createTree() {
+    public String createTree() {
         allBranches = new ArrayList<TreeBranch>();
         boolean firstRootBranch = true;
-        AbstractApplicationContext context = SingletonContext.getInstance();
-        DBHelperDAO dbHelper = (DBHelperDAO) context.getBean("dbhelpertreetable");
         allBranches = dbHelper.exportFromDB();
         StringBuffer sb = new StringBuffer();
         sb.delete(0, sb.length());
@@ -34,7 +40,7 @@ public class TreeNode {
         for (int i = 0; i < allBranches.size(); i++) {
             if (allBranches.get(i).getParentId() == 0) {
                 if (firstRootBranch == false) sb.append(",\n");
-                sb.append("{title: \"" + allBranches.get(i).getText() + "\"");
+                sb.append("{title: \"" + allBranches.get(i).getText() + "\" , key: \""+ allBranches.get(i).getId()+"\"");
                 checkChildrenBranches(sb, allBranches.get(i));
                 firstRootBranch = false;
             }
@@ -51,7 +57,7 @@ public class TreeNode {
      * @param sb     строка в которую записывается само дерево
      * @param branch
      */
-    private static void checkChildrenBranches(StringBuffer sb, TreeBranch branch) {
+    private void checkChildrenBranches(StringBuffer sb, TreeBranch branch) {
         boolean isFolder = false;
         boolean firstBranch = true;
         // System.out.println("----------------\n"+sb);
@@ -63,7 +69,7 @@ public class TreeNode {
                     isFolder = true;
                 }
                 if (firstBranch == false) sb.append(",");
-                sb.append("{title: \"" + allBranches.get(i).getText() + "\"");
+                sb.append("{title: \"" + allBranches.get(i).getText() + "\" , key: \""+ allBranches.get(i).getId()+"\"");
                 checkChildrenBranches(sb, allBranches.get(i));
                 firstBranch = false;
             }

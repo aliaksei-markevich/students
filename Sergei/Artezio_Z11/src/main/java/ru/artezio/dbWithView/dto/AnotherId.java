@@ -1,49 +1,49 @@
 package ru.artezio.dbWithView.dto;
 
 public class AnotherId {
-    int first_id;
-    int second_id;
-    int main_id;
+    int firstId;
+    int secondId;
+    int mainId;
 
     public AnotherId() {
     }
 
-    public AnotherId(int first_id, int second_id, int main_id) {
-        this.first_id = first_id;
-        this.second_id = second_id;
-        this.main_id = main_id;
+    public AnotherId(int firstId, int secondId, int mainId) {
+        this.firstId = firstId;
+        this.secondId = secondId;
+        this.mainId = mainId;
     }
 
-    public int getFirst_id() {
-        return first_id;
+    public int getFirstId() {
+        return firstId;
     }
 
-    public void setFirst_id(int first_id) {
-        this.first_id = first_id;
+    public void setFirstId(int firstId) {
+        this.firstId = firstId;
     }
 
-    public int getSecond_id() {
-        return second_id;
+    public int getSecondId() {
+        return secondId;
     }
 
-    public void setSecond_id(int second_id) {
-        this.second_id = second_id;
+    public void setSecondId(int secondId) {
+        this.secondId = secondId;
     }
 
-    public int getMain_id() {
-        return main_id;
+    public int getMainId() {
+        return mainId;
     }
 
-    public void setMain_id(int main_id) {
-        this.main_id = main_id;
+    public void setMainId(int mainId) {
+        this.mainId = mainId;
     }
 
     @Override
     public String toString() {
         return "AnotherId{" +
-                "first_id=" + first_id +
-                ", second_id=" + second_id +
-                ", main_id=" + main_id +
+                "firstId=" + firstId +
+                ", secondId=" + secondId +
+                ", mainId=" + mainId +
                 '}';
     }
 }

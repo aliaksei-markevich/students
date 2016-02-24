@@ -10,9 +10,9 @@ import java.util.List;
  *
  * @param <T> Объекты, которые будут использоваться для записи и чтения из БД
  */
-public interface DBHelperDAO<T> {
+public interface HibernateDAO<T> {
+    List<T> exportFromDBWithString(String value);
     List<T> exportFromDB();
     void importToDB(List<T> list, ObjectForJSON obj);
     void clearTable();
-    Class<T> getMyType();
 }

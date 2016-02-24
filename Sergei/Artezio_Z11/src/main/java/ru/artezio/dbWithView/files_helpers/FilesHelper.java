@@ -5,6 +5,6 @@ import ru.artezio.dbWithView.dto.ObjectForJSON;
 import java.io.InputStream;
 import java.util.List;
 
-public interface FilesHelperInterface<T> {
+public interface FilesHelper<T> {
     List<T> createElements(InputStream inputStream, ObjectForJSON obj);
 }

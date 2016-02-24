@@ -3,6 +3,7 @@ package ru.artezio.dbWithView.files_helpers;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.springframework.stereotype.Component;
 import ru.artezio.dbWithView.dto.AnotherId;
 import ru.artezio.dbWithView.models.Client;
 import ru.artezio.dbWithView.dto.ObjectForJSON;
@@ -13,10 +14,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * Класс позволяющий считывать объекты с файла XSL
- */
-public class XSLFilesHelper implements FilesHelperInterface<Client> {
+
+@Component("xslFilesHelper")
+public class XSLFilesHelper implements FilesHelper<Client> {
 
     public List<Client> createElements(InputStream inputStream, ObjectForJSON obj) {
 

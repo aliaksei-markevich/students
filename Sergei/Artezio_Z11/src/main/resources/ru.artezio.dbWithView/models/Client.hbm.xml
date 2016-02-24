@@ -14,9 +14,9 @@
         <property name="firstName" column="firstname" type="string"/>
         <property name="numberPhone" column="prone_number" type="int"/>
         <component name="anotherId" access="field" class="ru.artezio.dbWithView.dto.AnotherId" >
-            <property name="first_id"  type="int"/>
-            <property name="second_id" type="int"/>
-            <property name="main_id" type="int"/>
+            <property name="firstId"  column="first_id" type="int"/>
+            <property name="secondId" column="second_id" type="int"/>
+            <property name="mainId" column="main_id" type="int"/>
         </component>
     </class>
 </hibernate-mapping>

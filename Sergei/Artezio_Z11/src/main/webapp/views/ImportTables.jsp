@@ -38,6 +38,7 @@
 <br>
 <a href="${context}/import?clear=1">Очистить список</a>
 <a href="${context}/import?clear=2">Очистить дерево</a>
+<a href="${context}/search">Поиск</a>
 <br>
 </body>
 </html>

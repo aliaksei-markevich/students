@@ -1,22 +1,19 @@
 package ru.artezio.dbWithView.db_helpers;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.artezio.dbWithView.dto.ObjectForJSON;
-import ru.artezio.dbWithView.models.Client;
 
 
 import java.util.Iterator;
 import java.util.List;
 
-@Repository
-public class DBHelper<T> implements DBHelperDAO<T> {
+
+public class HibernateHelper<T> implements HibernateDAO<T> {
 
     private Class<T> type;
 
@@ -28,10 +25,11 @@ public class DBHelper<T> implements DBHelperDAO<T> {
         this.type = type;
     }
 
+
     private final HibernateTemplate template;
 
     @Autowired
-    public DBHelper(HibernateTemplate template) {
+    public HibernateHelper(HibernateTemplate template) {
         this.template = template;
     }
 
@@ -62,9 +60,17 @@ public class DBHelper<T> implements DBHelperDAO<T> {
         }
     }
 
-    @Override
-    public Class<T> getMyType() {
-        return null;
-    }
 
+    @Override
+    public List<T> exportFromDBWithString(String value) {
+        Session session = this.template.getSessionFactory().openSession();
+        String QUERY;
+        if (type.getSimpleName().equals("Client")) {
+            QUERY = "from " + type.getSimpleName() + " as rb where rb.lastName like '" + value + "%'";
+        } else {
+            QUERY = "from " + type.getSimpleName() + " as rb where rb.text like '" + value + "%'";
+        }
+        List<T> list = session.createQuery(QUERY).list();
+        return list;
+    }
 }

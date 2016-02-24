@@ -1,10 +1,6 @@
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Ошибка</title>
-    <link rel="shortcut icon" href="">
-</head>
-<body>
+
 <p>Данной страницы не существует</p>
-</body>
-</html>
+Error page

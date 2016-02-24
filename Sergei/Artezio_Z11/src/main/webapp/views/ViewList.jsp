@@ -4,7 +4,7 @@
 <head>
     <title>Просмотр таблицы .xsl списком </title>
     <link rel="shortcut icon" href="">
-    <c:set var="context" value="${pageContext.request.contextPath}" />
+    <c:set var="context" value="${pageContext.request.contextPath}"/>
 </head>
 <body>
 <table border="1">
@@ -16,7 +16,11 @@
         <td>Какой-то код:</td>
     </tr>
     <c:forEach items="${data}" var="data" varStatus="status">
-        <tr valign="top">
+        <tr valign="top"
+                <c:if test="${data.getIdClient()==index}">
+                    bgcolor="#FF0000"
+                </c:if>
+        >
             <td>${data.getIdClient()}</td>
             <td>${data.getLastName()}</td>
             <td>${data.getFirstName()}</td>
@@ -28,6 +32,7 @@
 <hr>
 <a href="${context}/import">Импорт в таблицу</a>
 <a href="${context}/viewTree">Просмотреть дерево</a>
+<a href="${context}/search">Поиск</a>
 <a href="${context}/login">Сменить логин</a>
 <br>
 </body>

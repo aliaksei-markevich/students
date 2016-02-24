@@ -1,6 +1,7 @@
 package ru.artezio.dbWithView.files_helpers;
 
 import au.com.bytecode.opencsv.CSVReader;
+import org.springframework.stereotype.Component;
 import ru.artezio.dbWithView.dto.ObjectForJSON;
 import ru.artezio.dbWithView.models.TreeBranch;
 
@@ -10,10 +11,9 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Класс позволяющий считывать объекты с файла CSV
- */
-public class CSVFilesHelper implements FilesHelperInterface<TreeBranch> {
+
+@Component("csvFilesHelper")
+public class CSVFilesHelper implements FilesHelper<TreeBranch> {
 
     public List<TreeBranch> createElements(InputStream inputStream, ObjectForJSON obj) {
 

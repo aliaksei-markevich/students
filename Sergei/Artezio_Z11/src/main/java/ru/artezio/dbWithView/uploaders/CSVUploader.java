@@ -2,18 +2,20 @@ package ru.artezio.dbWithView.uploaders;
 
 
 import org.springframework.web.multipart.MultipartFile;
-import ru.artezio.dbWithView.db_helpers.DBHelperDAO;
-import ru.artezio.dbWithView.files_helpers.FilesHelperInterface;
+import ru.artezio.dbWithView.db_helpers.HibernateDAO;
+import ru.artezio.dbWithView.files_helpers.FilesHelper;
 import ru.artezio.dbWithView.dto.ObjectForJSON;
 import ru.artezio.dbWithView.models.TreeBranch;
 
-import javax.servlet.http.Part;
 import java.util.Collections;
 import java.util.List;
 
+
 public class CSVUploader extends Uploader<TreeBranch> {
-    DBHelperDAO dbHelper;
-    FilesHelperInterface fileHelper;
+
+    HibernateDAO dbHelper;
+
+    FilesHelper fileHelper;
 
     public ObjectForJSON uploadFile(MultipartFile file) {
         ObjectForJSON obj = new ObjectForJSON();
@@ -24,19 +26,19 @@ public class CSVUploader extends Uploader<TreeBranch> {
     }
 
 
-    public DBHelperDAO getDbHelper() {
+    public HibernateDAO getDbHelper() {
         return dbHelper;
     }
 
-    public void setDbHelper(DBHelperDAO dbHelper) {
+    public void setDbHelper(HibernateDAO dbHelper) {
         this.dbHelper = dbHelper;
     }
 
-    public FilesHelperInterface getFileHelper() {
+    public FilesHelper getFileHelper() {
         return fileHelper;
     }
 
-    public void setFileHelper(FilesHelperInterface fileHelper) {
+    public void setFileHelper(FilesHelper fileHelper) {
         this.fileHelper = fileHelper;
     }
 }

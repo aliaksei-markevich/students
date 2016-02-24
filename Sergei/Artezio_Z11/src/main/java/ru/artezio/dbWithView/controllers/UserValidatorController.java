@@ -14,7 +14,7 @@ import java.security.Principal;
 @Controller
 public class UserValidatorController {
     @RequestMapping(value = "/login",method = RequestMethod.GET)
-    public String loginshow(){
+    public String loginShow(){
         return "Login";
     }
 

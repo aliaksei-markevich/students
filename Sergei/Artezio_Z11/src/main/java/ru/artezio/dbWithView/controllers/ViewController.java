@@ -33,21 +33,19 @@ public class ViewController {
         return "ViewTree";
     }
 
-    @RequestMapping(value = "/viewList",method = RequestMethod.POST)
-    public String searchAndShowListClient(@RequestParam(required=false) Integer index, Model model) {
+    @RequestMapping(value = "/viewList",method = RequestMethod.GET,params = "index")
+    public String searchAndShowListClient(@RequestParam(required = false) final Integer index, Model model) {
         if(index!=null){
             model.addAttribute("index",index);
-            System.out.println(index);
         }
         model.addAttribute("data", dbHelper.exportFromDB());
         return "ViewList";
     }
 
-    @RequestMapping(value = "/viewTree",method = RequestMethod.POST)
-    public String searchAndShowTree(@RequestParam(required=false) Integer index, Model model) {
+    @RequestMapping(value = "/viewTree",method = RequestMethod.GET,params = "index")
+    public String searchAndShowTree(@RequestParam(required = false) final Integer index, Model model) {
         if(index!=null){
             model.addAttribute("index","\""+index+"\"");
-            System.out.println(index);
         }
         String tree = treeNode.createTree();
         model.addAttribute("tree", tree);

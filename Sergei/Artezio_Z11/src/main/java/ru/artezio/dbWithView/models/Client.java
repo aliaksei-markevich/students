@@ -2,13 +2,18 @@ package ru.artezio.dbWithView.models;
 
 import ru.artezio.dbWithView.dto.AnotherId;
 
+import javax.xml.bind.annotation.*;
+
 /**
  * Класс реализующий харнение данных для клиентов (xls файл)
  */
+@XmlRootElement(name = "employee")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Client {
 
     private int idClient = -1;
     private String lastName;
+
     private String firstName;
     private int numberPhone;
     private AnotherId anotherId;

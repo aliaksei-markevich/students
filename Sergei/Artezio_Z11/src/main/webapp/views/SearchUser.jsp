@@ -10,16 +10,16 @@
 <body>
 <div>
     <h4>Форма для поиска клиентов по фамилии</h4>
-    <form method="post" action="/viewList">
-        <input type="text" name="searchLastName" id="queryList"/>
-        <input type="hidden" name="index" id="indexList"/>
-        <input type="submit" value="Показать" />
+    <form method="get" action="/viewList?search">
+        <input type="text" class="autocomplete" data-url="/search?client"/>
+        <input type="hidden" name="index"/>
+        <input type="submit" value="Показать"/>
     </form>
     <h4>Форма для поиска в дереве</h4>
-    <form method="post" action="/viewTree">
-        <input type="text" name="searchBranch" id="queryTree"/>
-        <input type="hidden" name="index" id="indexTree"/>
-        <input type="submit" value="Показать" />
+    <form method="get" action="/viewTree?search">
+        <input type="text" class="autocomplete" data-url="/search?tree"/>
+        <input type="hidden" name="index"/>
+        <input type="submit" value="Показать"/>
     </form>
 </div>
 </body>

@@ -1,6 +1,6 @@
 package ru.artezio.dbWithView.db_helpers;
 
-import org.springframework.orm.hibernate4.HibernateTemplate;
+
 import ru.artezio.dbWithView.dto.ObjectForJSON;
 
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
  * @param <T> Объекты, которые будут использоваться для записи и чтения из БД
  */
 public interface HibernateDAO<T> {
-    List<T> exportFromDBWithString(String value);
+    List exportFromDBWithString(String value);
     List<T> exportFromDB();
     void importToDB(List<T> list, ObjectForJSON obj);
     void clearTable();

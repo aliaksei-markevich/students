@@ -1,8 +1,6 @@
 package ru.artezio.dbWithView.controllers;
 
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +11,6 @@ import ru.artezio.dbWithView.db_helpers.HibernateDAO;
 import ru.artezio.dbWithView.models.Client;
 import ru.artezio.dbWithView.models.TreeBranch;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Controller
@@ -35,17 +31,17 @@ public class SearchController {
     }
 
 
-    @RequestMapping(value="/client",method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST, params = "client")
     @ResponseBody
-    public List<Client> searchRequestClient(@RequestParam String nameStartsWithClient) {
-        List<Client> listClients = dbHelperClient.exportFromDBWithString(nameStartsWithClient);
+    public List<Client> searchRequestClient(@RequestParam String textStartsWith) {
+        List<Client> listClients = dbHelperClient.exportFromDBWithString(textStartsWith);
         return listClients;
     }
 
-    @RequestMapping(value="/tree",method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST, params = "tree")
     @ResponseBody
-    public List<TreeBranch> searchRequestTree(@RequestParam String nameStartsWithTree) {
-        List<TreeBranch> listBranches = dbHelperTree.exportFromDBWithString(nameStartsWithTree);
+    public List<TreeBranch> searchRequestTree(@RequestParam String textStartsWith) {
+        List<TreeBranch> listBranches = dbHelperTree.exportFromDBWithString(textStartsWith);
         return listBranches;
     }
 }

@@ -15,6 +15,8 @@
         <intercept-url pattern="/viewList**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
         <intercept-url pattern="/viewTree**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
         <intercept-url pattern="/search**" access="isAuthenticated()" />
+        <intercept-url pattern="/convert**" access="isAuthenticated()" />
+        <intercept-url pattern="/files**" access="isAuthenticated()" />
 
        <form-login
                 login-page="/login"

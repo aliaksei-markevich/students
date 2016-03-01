@@ -1,13 +1,10 @@
 package ru.artezio.dbWithView.db_helpers;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateTemplate;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.artezio.dbWithView.dto.ObjectForJSON;
-
 
 import java.util.Iterator;
 import java.util.List;
@@ -47,7 +44,6 @@ public class HibernateHelper<T> implements HibernateDAO<T> {
             this.template.save(iterator.next());
             count++;
         }
-        System.out.println(count);
         obj.setCountUploadRecords(count);
     }
 
@@ -62,15 +58,14 @@ public class HibernateHelper<T> implements HibernateDAO<T> {
 
 
     @Override
-    public List<T> exportFromDBWithString(String value) {
+    public List exportFromDBWithString(String value) {
         Session session = this.template.getSessionFactory().openSession();
         String QUERY;
         if (type.getSimpleName().equals("Client")) {
-            QUERY = "from " + type.getSimpleName() + " as rb where rb.lastName like '" + value + "%'";
+            QUERY = "select rb.lastName,rb.idClient from " + type.getSimpleName() + " as rb where rb.lastName like '" + value + "%'";
         } else {
-            QUERY = "from " + type.getSimpleName() + " as rb where rb.text like '" + value + "%'";
+            QUERY = "select rb.text,rb.id from " + type.getSimpleName() + " as rb where rb.text like '" + value + "%'";
         }
-        List<T> list = session.createQuery(QUERY).list();
-        return list;
+        return session.createQuery(QUERY).list();
     }
 }

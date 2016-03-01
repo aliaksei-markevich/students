@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class XSLUploader extends Uploader<Client> {
+
     HibernateDAO dbHelper;
     FilesHelper fileHelper;
 

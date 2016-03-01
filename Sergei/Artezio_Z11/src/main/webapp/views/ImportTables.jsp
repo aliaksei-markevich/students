@@ -35,6 +35,7 @@
 <hr>
 <a href="${context}/viewList">Просмотреть список</a>
 <a href="${context}/viewTree">Просмотреть дерево</a>
+<a href="${context}/convert">Конвентировать</a>
 <br>
 <a href="${context}/import?clear=1">Очистить список</a>
 <a href="${context}/import?clear=2">Очистить дерево</a>

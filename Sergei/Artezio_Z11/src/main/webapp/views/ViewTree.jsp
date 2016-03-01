@@ -22,7 +22,7 @@
                         },
                         ${tree}
                     });
-                    <c:if test="${not empty index }">
+                    <c:if test="${not empty index}">
                     $("#tree").dynatree("getTree").activateKey(${index});
                     </c:if>
                 }));
@@ -32,6 +32,7 @@
 <body>
 <div id="tree"></div>
 <hr>
+<a href="${context}/convert">Конвентировать</a>
 <a href="${context}/import">Импорт в таблицу</a>
 <a href="${context}/viewList">Просмотреть список</a>
 <a href="${context}/search">Поиск</a>

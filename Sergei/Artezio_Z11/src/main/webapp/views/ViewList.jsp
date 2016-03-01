@@ -30,6 +30,7 @@
     </c:forEach>
 </table>
 <hr>
+<a href="${context}/convert">Конвентировать</a>
 <a href="${context}/import">Импорт в таблицу</a>
 <a href="${context}/viewTree">Просмотреть дерево</a>
 <a href="${context}/search">Поиск</a>

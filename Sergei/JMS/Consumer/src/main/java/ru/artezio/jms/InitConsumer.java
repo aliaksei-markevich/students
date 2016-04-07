@@ -7,6 +7,7 @@ import javax.jms.*;
 public class InitConsumer {
     public static void main(String[] args) {
         try {
+			org.apache.log4j.BasicConfigurator.configure();
             ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(ActiveMQConnectionFactory.DEFAULT_USER, ActiveMQConnectionFactory.DEFAULT_PASSWORD, "failover://tcp://localhost:61616");
             Connection connection = connectionFactory.createConnection();
             connection.start();

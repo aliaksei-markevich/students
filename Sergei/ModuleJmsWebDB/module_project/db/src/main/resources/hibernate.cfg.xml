@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.dialect">
+            org.hibernate.dialect.PostgreSQLDialect
+        </property>
+        <property name="hibernate.connection.driver_class">
+            org.postgresql.Driver
+        </property>
+
+        <!-- Assume test is the database name -->
+        <property name="hibernate.connection.url">
+            jdbc:postgresql://localhost:5432/artezio_db
+        </property>
+        <property name="hibernate.connection.username">
+            postgres
+        </property>
+        <property name="hibernate.connection.password">
+            root
+        </property>
+       <!-- связь между таблицами-->
+        <property name="hibernate.enable_lazy_load_no_trans">true</property>
+        <property name="hibernate.c3p0.min_size">5</property>
+        <property name="hibernate.c3p0.max_size">20</property>
+        <property name="hibernate.c3p0.timeout">300</property>
+        <property name="hibernate.c3p0.max_statements">50</property>
+        <property name="hibernate.c3p0.idle_test_period">3000</property>
+        <!-- List of XML mapping files -->
+
+        <mapping resource="db/models/TreeBranch.hbm.xml"/>
+        <mapping resource="db/models/User.hbm.xml"/>
+        <mapping resource="db/models/Role.hbm.xml"/>
+        <mapping class="ru.artezio.db.models.Client" />
+        <mapping class="ru.artezio.db.models.Position" />
+
+    </session-factory>
+</hibernate-configuration>

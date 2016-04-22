@@ -1,4 +1,4 @@
-package ru.artezio.dbWithView.converters;
+package ru.artezio.jms.converters;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,22 +12,22 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 
-@Component("CSVToXMLConverter")
-public class CSVToXMLConverter extends AbstractConvert{
+@Component("XSLToXMLConverter")
+public class XSLToXMLConverter extends AbstractConvert {
 
     @Autowired
-    @Qualifier("csvFilesHelper")
+    @Qualifier("xslFilesHelper")
     FilesHelper fileHelper;
 
     @Override
-    protected String chooseModel(String pathFile,MultipartFile file,ObjectForJSON status) throws JAXBException, IOException {
-        data.setBranches(fileHelper.createElements(file.getInputStream(), status));
-        data.setClients(null);
+    protected String chooseModel(String pathFile, MultipartFile file, ObjectForJSON status) throws JAXBException, IOException {
+        super.data.setClients(this.fileHelper.createElements(file.getInputStream(), status));
+        super.data.setBranches(null);
         return createFile(data, pathFile);
     }
 
     private String createFile(DataForXML data, String pathFile) throws JAXBException {
         JAXBContext jaxbContext = JAXBContext.newInstance(DataForXML.class);
-        return super.nameAndSaveFile(data,jaxbContext,pathFile);
+        return super.nameAndSaveFile(data, jaxbContext, pathFile);
     }
 }

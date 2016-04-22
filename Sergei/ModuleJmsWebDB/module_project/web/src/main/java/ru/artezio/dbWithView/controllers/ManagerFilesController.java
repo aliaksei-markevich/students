@@ -27,7 +27,7 @@ public class ManagerFilesController {
         String phyPath = request.getSession().getServletContext().getRealPath("/");
         String filesPath = phyPath + "files/";
         List<String> listFilesXML = this.getListNameFiles(filesPath);
-        model.addAttribute("lisFilesXML", listFilesXML);
+        model.addAttribute("listFilesXML", listFilesXML);
         return "ManagerFiles";
     }
 
@@ -35,9 +35,11 @@ public class ManagerFilesController {
         List<String> listNameFilesXML = new ArrayList<>();
         File folderWithXMlFiles = new File(filesPath);
         File[] listOfXMLFiles = folderWithXMlFiles.listFiles();
-        for (File file : listOfXMLFiles) {
-            if (file.isFile() && file.getName().contains(".xml")) {
-                listNameFilesXML.add(file.getName());
+        if (listOfXMLFiles != null) {
+            for (File file : listOfXMLFiles) {
+                if (file.isFile() && file.getName().contains(".xml")) {
+                    listNameFilesXML.add(file.getName());
+                }
             }
         }
         return listNameFilesXML;

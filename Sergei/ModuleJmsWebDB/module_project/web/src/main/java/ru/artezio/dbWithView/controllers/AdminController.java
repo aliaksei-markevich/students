@@ -45,7 +45,7 @@ public class AdminController {
                 //Если фал xls то в список, если csv то в дерево
                 // obj = factoryMethodForUploaders.getUploader(file).uploadFile(file);
                 //Обратно получить количество обновленных строк
-                catalogJmsSender.sendMessages(file);
+                catalogJmsSender.sendMessages(file,"");
                 obj = new ObjectForJSON();
                 obj.setStatus("OK");
                 obj.setSizeFile(file.getSize());

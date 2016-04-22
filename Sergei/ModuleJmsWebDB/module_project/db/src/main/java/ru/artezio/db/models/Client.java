@@ -3,6 +3,7 @@ package ru.artezio.db.models;
 import ru.artezio.db.dto.AnotherId;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.HashSet;
 
 import java.util.Set;
@@ -43,6 +44,7 @@ public class Client {
     @JoinTable(name = "clients_positions", joinColumns = {
             @JoinColumn(name = "id_client", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "id_position", insertable = false,nullable = false, updatable = false)})
+    @XmlTransient
     private Set<Position> positions = new HashSet<Position>();
 
     public Set<Position> getPositions() {

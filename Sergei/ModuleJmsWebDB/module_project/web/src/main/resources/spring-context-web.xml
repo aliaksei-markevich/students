@@ -18,14 +18,7 @@
     <mvc:resources mapping="/files/**" location="/files/"/>
     <mvc:annotation-driven/>
 
-    <!--1 consumer work with Start.java(consumer)-->
     <import resource="classpath:spring-context-db.xml"/>
-    <!-- for convert files-->
-    <bean id="csvFilesHelper" class="ru.artezio.jms.files_helpers.CSVFilesHelper"/>
-    <bean id="xslFilesHelper" class="ru.artezio.jms.files_helpers.XSLFilesHelper"/>
-
-    <!--  2 consumers why?work without Start.java-->
-    <!-- <import resource="classpath:spring-context-jms.xml"/>-->
 
     <bean id="amqConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
         <property name="brokerURL">
@@ -35,11 +28,15 @@
 
     <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
         <property name="connectionFactory" ref="amqConnectionFactory"/>
-        <property name="defaultDestination" ref="destination"/>
+        <property name="defaultDestination" ref="importDestination"/>
     </bean>
 
-    <bean id="destination" class="org.apache.activemq.command.ActiveMQQueue">
+    <bean id="importDestination" class="org.apache.activemq.command.ActiveMQQueue">
         <constructor-arg value="TEST.CATALOG"/>
+    </bean>
+
+    <bean id="convertDestination" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg value="TEST.CONVERT"/>
     </bean>
     <!--&#45;&#45;-->
 

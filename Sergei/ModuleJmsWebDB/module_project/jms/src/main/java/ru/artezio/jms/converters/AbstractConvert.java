@@ -1,4 +1,4 @@
-package ru.artezio.dbWithView.converters;
+package ru.artezio.jms.converters;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

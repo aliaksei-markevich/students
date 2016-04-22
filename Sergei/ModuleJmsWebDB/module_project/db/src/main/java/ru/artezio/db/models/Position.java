@@ -1,6 +1,7 @@
 package ru.artezio.db.models;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.HashSet;
 import java.util.Set;
 

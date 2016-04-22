@@ -34,7 +34,7 @@
         </div>
 <br>
 <div id="map" style="width:400px; height:300px"></div>
-<c:if test="${user_name=='admin'}">
+    <c:if test="${user_name=='admin'}">
     <a href="${pageContext.servletContext.contextPath}/import">Импортировать список</a>
 </c:if>
 <a href="${context}/viewList">Просмотреть список</a>

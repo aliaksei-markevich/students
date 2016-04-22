@@ -3,13 +3,12 @@
 <script src="/js/jquery.js" type="text/javascript"></script>
 <script src="/js/deleteXMLFIle.js" type="text/javascript"></script>
 <div>
-    <c:forEach items="${lisFilesXML}" var="file" varStatus="status">
+    <c:forEach items="${listFilesXML}" var="file" varStatus="status">
         <div>
             <a href="../files/${file}">${file}</a>
             <input type="button" value="Удалить файл"/>
         </div>
     </c:forEach>
-    </table>
 </div>
 <hr>
 <a href="${context}/viewList">Просмотреть список</a>

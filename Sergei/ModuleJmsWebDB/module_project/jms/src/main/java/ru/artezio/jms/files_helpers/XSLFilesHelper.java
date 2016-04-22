@@ -26,7 +26,6 @@ public class XSLFilesHelper implements FilesHelper<Client> {
     public HibernateDAO dbHelper;
 
     public List<Client> createElements(InputStream inputStream, ObjectForJSON obj) {
-
         String lastName, firstName;
         int numberPhone;
         AnotherId code;

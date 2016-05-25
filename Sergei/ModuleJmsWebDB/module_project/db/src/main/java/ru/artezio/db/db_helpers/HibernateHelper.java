@@ -37,8 +37,7 @@ public class HibernateHelper<T> implements HibernateDAO<T> {
     }
 
     @Override
-    public List<T> exportFromDB() {
-        return (List<T>) this.template.find("from " + type.getSimpleName());
+    public List<T> exportFromDB() {return (List<T>) this.template.find("from " + type.getSimpleName());
     }
 
     @Transactional

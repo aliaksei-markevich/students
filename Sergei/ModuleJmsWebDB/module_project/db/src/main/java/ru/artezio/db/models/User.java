@@ -6,6 +6,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class User {
+
     int user_id;
 
     @Size(min = 3,max = 20,message = "Имя должно быть больше 3 и меньше 20")

@@ -1,0 +1,40 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+
+    <http pattern="/css/**" security="none" />
+    <http pattern="/js/**" security="none" />
+    <http pattern="/image/**" security="none" />
+
+    <http auto-config="true">
+        <intercept-url pattern="/import**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/admin**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/viewList**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
+        <intercept-url pattern="/viewTree**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
+        <intercept-url pattern="/search**" access="isAuthenticated()" />
+        <intercept-url pattern="/convert**" access="isAuthenticated()" />
+        <intercept-url pattern="/files**" access="isAuthenticated()" />
+
+       <form-login
+                login-page="/login"
+                login-processing-url="/login"
+                username-parameter="login"
+                password-parameter="password"
+                default-target-url="/success_login"
+                authentication-failure-url="/login.do?error"
+                always-use-default-target="true"/>
+        <logout logout-success-url="/login" logout-url="/j_spring_security_logout" />
+        <csrf disabled="true"/>
+
+        <!-- enable csrf protection -->
+        <csrf />
+    </http>
+
+    <authentication-manager>
+        <authentication-provider ref="provider"/>
+    </authentication-manager>
+</beans:beans>

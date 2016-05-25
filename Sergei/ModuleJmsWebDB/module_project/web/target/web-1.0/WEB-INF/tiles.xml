@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+
+    <definition name="baseLayout" template="/views/layout.jsp">
+        <put-attribute name="titleHead" value=""/>
+        <put-attribute name="title" value=""/>
+        <put-attribute name="body" value=""/>
+    </definition>
+
+    <definition name="ErrorUser" extends="baseLayout">
+        <put-attribute name="titleHead" value="Ошибка"/>
+        <put-attribute name="title" value="Ошибка пользователя"/>
+        <put-attribute name="body" value="/views/ErrorUser.jsp"/>
+    </definition>
+
+    <definition name="ErrorJSP" extends="baseLayout">
+        <put-attribute name="titleHead" value="Ошибка"/>
+        <put-attribute name="title" value="Ошибка страницы"/>
+        <put-attribute name="body" value="/views/ErrorJSP.jsp"/>
+    </definition>
+
+    <definition name="EditFormCreateUser" extends="baseLayout">
+        <put-attribute name="titleHead" value="Регистрации"/>
+        <put-attribute name="title" value="Форма для регистрации"/>
+        <put-attribute name="body" value="/views/EditFormCreateUser.jsp"/>
+    </definition>
+
+    <definition name="SuccessRegistration" extends="baseLayout">
+        <put-attribute name="titleHead" value="success"/>
+        <put-attribute name="title" value="success"/>
+        <put-attribute name="body" value="/views/SuccessRegistration.jsp"/>
+    </definition>
+
+    <definition name="ManagerFiles" extends="baseLayout">
+        <put-attribute name="titleHead" value="Менеджер файлов конвертации"/>
+        <put-attribute name="title" value="Менеджер файлов конвертации"/>
+        <put-attribute name="body" value="/views/ManagerFiles.jsp"/>
+    </definition>
+
+</tiles-definitions>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:flow="http://www.springframework.org/schema/webflow-config"
+             xsi:schemaLocation="http://www.springframework.org/schema/webflow-config http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.4.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+    <!-- Define the flow executor responsible for executing login web flow -->
+    <flow:flow-executor id="loginFlowExecutor" flow-registry="loginFlowRegistry"/>
+
+    <!-- Define the registry that holds references to all the flow related XML configuration-->
+    <flow:flow-registry id="loginFlowRegistry" flow-builder-services="flowBuilder" base-path="/flows">
+        <flow:flow-location-pattern value="*.xml"/>
+    </flow:flow-registry>
+
+    <flow:flow-builder-services id="flowBuilder" view-factory-creator="flowViewResolver" validator="validator" />
+    <!--validator="validator"-->
+    <bean id="flowViewResolver" class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator">
+        <property name="viewResolvers">
+            <list>
+                <ref bean="viewResolver"/>
+            </list>
+        </property>
+    </bean>
+
+  <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+
+</beans>

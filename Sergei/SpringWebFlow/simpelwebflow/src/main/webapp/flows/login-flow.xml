@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+http://www.springframework.org/schema/webflow/spring-webflow-2.4.xsd" start-state="displayLoginView">
+    
+    <var name="user" class="ru.artezio.webflow.User"/>
+
+    <view-state id="displayLoginView" view="display_login" model="user" >
+        <transition on="submit" to="actionCheckLogin"/>
+        <transition on="createUser" to="createUserFlow" validate="false"/>
+    </view-state>
+    
+    <action-state id="actionCheckLogin">
+        <evaluate expression="userService.checkUser(user)"/>
+        <transition on="success" to="mainContent"/>
+        <transition on="failed" to="displayLoginView">
+            <set name="flashScope.message" value="resourceBundle.wrong_login_password"/>
+                </transition>
+    </action-state>
+
+    <subflow-state id="createUserFlow" subflow="create-user" >
+        <input name="user"/>
+        <transition on="end" to="displayLoginView"/>
+    </subflow-state>
+
+    <view-state id="mainContent" view="main"/>
+</flow>
